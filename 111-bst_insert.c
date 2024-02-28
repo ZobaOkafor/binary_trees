@@ -11,7 +11,6 @@ bst_t *bst_insert(bst_t **tree, int value)
 {
 	bst_t *new_node, *current, *parent;
 
-	/* Check if the tree pointer is NULL */
 	if (tree == NULL)
 		return (NULL);
 
