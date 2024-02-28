@@ -18,10 +18,10 @@
  */
 struct binary_tree_s
 {
-    int n;
-    struct binary_tree_s *parent;
-    struct binary_tree_s *left;
-    struct binary_tree_s *right;
+	int n;
+	struct binary_tree_s *parent;
+	struct binary_tree_s *left;
+	struct binary_tree_s *right;
 };
 
 typedef struct binary_tree_s binary_tree_t;
@@ -77,11 +77,13 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
 void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int));
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
+		const binary_tree_t *second);
 
 
 
 
-/* Helper functions
+/* Helper functions */
+
 
 #endif
