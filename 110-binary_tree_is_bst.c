@@ -16,11 +16,11 @@ int is_bst_util(const binary_tree_t *tree, const binary_tree_t *min,
 	if (tree == NULL)
 		return (1);
 
-	if ((min && tree->n <= min->n) || (max && tree->n >= max->n))
+	if ((min && tree->n <= *min) || (max && tree->n >= *max))
 		return (0);
 
-	return (is_bst_util(tree->left, min, tree) &&
-			is_bst_util(tree->right, tree, max));
+	return (is_bst_util(tree->left, min, tree->n) &&
+			is_bst_util(tree->right, &(tree->n), max));
 }
 
 
