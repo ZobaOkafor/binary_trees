@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <limits.h>
 
 
 /* Basic binary tree struct */
@@ -86,6 +87,8 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 /* Helper functions */
 bst_t *rl_node(bst_t *node, bst_t *root);
 bst_t *right_node(bst_t *node, bst_t *root);
+size_t binary_height(const binary_tree_t *tree);
+int is_avl_util(const binary_tree_t *tree, int min, int max);
 
 
 #endif
