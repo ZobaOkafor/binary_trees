@@ -43,13 +43,13 @@ void check_avl_balance(avl_t **node, int value)
 
 
 /**
- * sucessor - determines the next/previous node of the removed node
+ * successor - determines the next/previous node of the removed node
  * @tree: pointer to the node
  * @mode: 1 for inorder sucessor, 2 for inorder precessor
  *
  * Return: pointer to the next/previous node
  */
-avl_t *sucessor(avl_t *tree, int mode)
+avl_t *successor(avl_t *tree, int mode)
 {
 	avl_t *node;
 
@@ -65,7 +65,7 @@ avl_t *sucessor(avl_t *tree, int mode)
 			return (tree);
 		}
 
-		node = sucessor(tree->left, 1);
+		node = successor(tree->left, 1);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ avl_t *sucessor(avl_t *tree, int mode)
 			return (tree);
 		}
 
-		node = sucessor(tree->right, 2);
+		node = successor(tree->right, 2);
 	}
 
 	return (node);
@@ -166,9 +166,9 @@ avl_t *avl_remove_search_ops(avl_t **tree, int value)
 		if ((*tree)->left || (*tree)->right)
 		{
 			if ((*tree)->right)
-				swap_node = sucessor((*tree)->right, 1);
+				swap_node = successor((*tree)->right, 1);
 			else
-				swap_node = sucessor((*tree)->left, 2);
+				swap_node = successor((*tree)->left, 2);
 			change_node(tree, &swap_node);
 			free(*tree);
 			*tree = swap_node;
