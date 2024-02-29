@@ -86,20 +86,20 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 
 /* Helper functions */
 heap_t *max(heap_t *tree);
-int successor(bst_t *node);
 void balance(avl_t **tree);
 int remove_node(bst_t *root);
 void extract_recursive(heap_t *tree);
+avl_t *sucessor(avl_t *tree, int mode);
 bst_t *rl_node(bst_t *node, bst_t *root);
 bst_t *right_node(bst_t *node, bst_t *root);
 int check_balance(const binary_tree_t *tree);
 void check_avl_balance(avl_t **node, int value);
 size_t binary_height(const binary_tree_t *tree);
 int check_parent_value(const binary_tree_t *tree);
-void change_node(avl_t **arg_tree, avl_t **arg_node);
+void node_swap(avl_t **arg_tree, avl_t **arg_node);
 avl_t *avl_remove_search_ops(avl_t **tree, int value);
 avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent,
-                avl_t **new, int value);
+		avl_t **new, int value);
 int is_avl_util(const binary_tree_t *tree, int min, int max);
 int is_bst_util(const binary_tree_t *tree, int low, int high);
 void create_avl_tree(avl_t **node, int *array, size_t size, int mode);
