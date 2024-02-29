@@ -85,10 +85,14 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 
 
 /* Helper functions */
+avl_t *sucessor(avl_t *tree, int mode);
 bst_t *rl_node(bst_t *node, bst_t *root);
 bst_t *right_node(bst_t *node, bst_t *root);
 int check_balance(const binary_tree_t *tree);
+void check_avl_balance(avl_t **node, int value);
 size_t binary_height(const binary_tree_t *tree);
+void change_node(avl_t **arg_tree, avl_t **arg_node);
+avl_t *avl_remove_search_ops(avl_t **tree, int value);
 int is_avl_util(const binary_tree_t *tree, int min, int max);
 int is_bst_util(const binary_tree_t *tree, int low, int high);
 avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent,
