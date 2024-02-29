@@ -93,10 +93,11 @@ void check_avl_balance(avl_t **node, int value);
 size_t binary_height(const binary_tree_t *tree);
 void change_node(avl_t **arg_tree, avl_t **arg_node);
 avl_t *avl_remove_search_ops(avl_t **tree, int value);
+avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent,
+                avl_t **new, int value);
 int is_avl_util(const binary_tree_t *tree, int min, int max);
 int is_bst_util(const binary_tree_t *tree, int low, int high);
-avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent,
-		avl_t **new, int value);
+void create_avl_tree(avl_t **node, int *array, size_t size, int mode);
 
 
 #endif
