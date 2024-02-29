@@ -1,47 +1,145 @@
 #include "binary_trees.h"
 
 /**
- * bst_remove - Removes a node from a Binary Search Tree.
- * @root: A pointer to the root node of the tree where you will remove a node.
- * @value: The value to remove in the tree.
+ * right_node - removes a node from a Binary Search Tree for node->right case
+ * @root: tree root
+ * @node: node to delete
  *
- * Return: A pointer to the new root node of the tree after
- * removing the desired value.
+ * Return: pointer the tree root
+ */
+bst_t *right_node(bst_t *node, bst_t *root)
+{
+	node->right->left = node->left;
+	node->right->parent = node->parent;
+	if (node->parent)
+	{
+		if (node == node->parent->left)
+			node->parent->left = node->right;
+		if (node == node->parent->right)
+			node->parent->right = node->right;
+	}
+	if (node->left)
+		node->left->parent = node->right;
+	if (root == node)
+		root = node->right;
+	free(node);
+	return (root);
+}
+
+
+/**
+ * rl_node -  removes a node from a Binary Search Tree for node->right->l case
+ * @root: tree root
+ * @node: node to delete
+ *
+ * Return: pointer the tree root
+ */
+bst_t *rl_node(bst_t *node, bst_t *root)
+{
+	node->right->left->right = node->right;
+	node->right->left->parent = node->parent;
+	node->right->left->left = node->left;
+	if (node->left)
+		node->left->parent = node->right->left;
+	node->right->parent = node->right->left;
+	if (root == node)
+		root = node->right->left;
+	else
+	{
+		if (node == node->parent->left)
+			node->parent->left = node->right->left;
+		if (node == node->parent->right)
+			node->parent->right = node->right->left;
+	}
+	node->right->left = NULL;
+	free(node);
+	return (root);
+}
+
+
+/**
+ * binary_tree_is_leaf - Checks if a node is a leaf
+ * @node: Pointer to the node to check
+ *
+ * Return: 1 if node is a leaf, otherwise 0
+ */
+int binary_tree_is_leaf(const binary_tree_t *node)
+{
+	if (node == NULL)
+		return (0);
+
+	/* If the node has no children, it's a leaf */
+	if (node->left == NULL && node->right == NULL)
+		return (1);
+
+	return (0);
+}
+
+
+/**
+ * bst_search - Searches for a value in a Binary Search Tree.
+ * @tree: A pointer to the root node of the BST to search.
+ * @value: The value to search in the tree.
+ *
+ * Return: A pointer to the node containing a value equals to `value`,
+ *         or NULL if the value is not found or if `tree` is NULL.
+ */
+bst_t *bst_search(const bst_t *tree, int value)
+{
+	if (tree == NULL)
+		return (NULL);
+
+	while (tree != NULL)
+	{
+		if (tree->n == value)
+			return ((bst_t *)tree);
+
+		if (value < tree->n)
+			tree = tree->left;
+		else
+			tree = tree->right;
+	}
+
+	return (NULL);
+}
+
+
+/**
+ * bst_remove - removes a node from a Binary Search Tree
+ * @root: tree root
+ * @value: node value
+ * Return: pointer the tree root
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
-	if (root == NULL)
-		return (NULL);
+	bst_t *node;
 
-	if (value < root->n)
-		root->left = bst_remove(root->left, value);
-	else if (value > root->n)
-		root->right = bst_remove(root->right, value);
-	else
+	node = bst_search(root, value);
+
+	if (node != NULL)
 	{
-		if (root->left == NULL)
+		if (binary_tree_is_leaf(node) == 1)
 		{
-			bst_t *temp = root->right;
-
-			free(root);
-			return (temp);
+			if (node == node->parent->left)
+				node->parent->left = NULL;
+			if (node == node->parent->right)
+				node->parent->right = NULL;
+			free(node);
+			return (root);
 		}
-		else if (root->right == NULL)
+		if (node->right && node->right->left)
+			root = rl_node(node, root);
+		else if (node->right)
+			root = right_node(node, root);
+		else
 		{
-			bst_t *temp = root->left;
-
-			free(root);
-			return (temp);
+			if (node->parent)
+				node->parent->right = node->left;
+			node->left->parent = node->parent;
+			if (root == node)
+				root = node->left;
+			free(node);
 		}
-
-		bst_t *temp = root->right;
-
-		while (temp && temp->left != NULL)
-			temp = temp->left;
-
-		root->n = temp->n;
-		root->right = bst_remove(root->right, temp->n);
 	}
-
 	return (root);
 }
