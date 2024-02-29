@@ -61,7 +61,8 @@ avl_t *avl_recursive_insert(avl_t **tree, avl_t *parent,
  */
 int check_balance(const binary_tree_t *tree)
 {
-	return (tree != NULL ? binary_height(tree->left) - binary_height(tree->right) : 0);
+	return (tree != NULL ? binary_height(tree->left) -
+			binary_height(tree->right) : 0);
 }
 
 
