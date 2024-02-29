@@ -85,7 +85,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 
 
 /* Helper functions */
-avl_t *sucessor(avl_t *tree, int mode);
+avl_t *successor(avl_t *tree, int mode);
 bst_t *rl_node(bst_t *node, bst_t *root);
 bst_t *right_node(bst_t *node, bst_t *root);
 int check_balance(const binary_tree_t *tree);
