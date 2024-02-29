@@ -84,6 +84,8 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 
 
 /* Helper functions */
+bst_t *rl_node(bst_t *node, bst_t *root);
+bst_t *right_node(bst_t *node, bst_t *root);
 
 
 #endif
