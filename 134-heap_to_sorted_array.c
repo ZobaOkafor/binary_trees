@@ -1,30 +1,45 @@
 #include "binary_trees.h"
 
 /**
- * heap_to_sorted_array - Converts a Binary Max Heap to a sorted array-integer.
- * @heap: pointer to the root node of the heap to convert.
- * @size: address to store the size of the array.
+ * heap_to_sorted_array - Converts a Binary Max Heap to a sorted array of integers
+ * @heap: Pointer to the root node of the heap to convert
+ * @size: Address to store the size of the array
  *
- * Return: pointer to the Sorted array
+ * Return: Pointer to the sorted array of integers
  */
 int *heap_to_sorted_array(heap_t *heap, size_t *size)
 {
-	int *array;
-	int extract, i = 0;
-	size_t heap_size;
+	int *sorted_array;
+	size_t i = 0, count = 0;
 
 	if (!heap)
 		return (NULL);
-	heap_size = binary_tree_size(heap);
-	*size = heap_size;
-	array = malloc(heap_size * sizeof(int));
-	if (!array)
+
+	/* Count the number of nodes in the heap */
+	count = binary_tree_size(heap);
+
+	/* Allocate memory for the sorted array */
+	sorted_array = malloc(count * sizeof(int));
+	if (!sorted_array)
 		return (NULL);
+
+	/* Extract the root node of the heap repeatedly until the heap is empty */
 	while (heap)
 	{
-		extract = heap_extract(&heap);
-		array[i] = extract;
-		i++;
+		sorted_array[i++] = heap->n;
+		heap_extract(&heap);
 	}
-	return (array);
+
+	/* Set the size of the array */
+	*size = count;
+
+	/* Reverse the array to get the sorted array in descending order */
+	for (i = 0; i < count / 2; i++)
+	{
+		int temp = sorted_array[i];
+		sorted_array[i] = sorted_array[count - i - 1];
+		sorted_array[count - i - 1] = temp;
+	}
+
+	return sorted_array;
 }
