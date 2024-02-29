@@ -86,8 +86,10 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 
 /* Helper functions */
 heap_t *max(heap_t *tree);
+int successor(bst_t *node);
+void balance(avl_t **tree);
+int remove_type(bst_t *root);
 void extract_recursive(heap_t *tree);
-avl_t *successor(avl_t *tree, int mode);
 bst_t *rl_node(bst_t *node, bst_t *root);
 bst_t *right_node(bst_t *node, bst_t *root);
 int check_balance(const binary_tree_t *tree);
