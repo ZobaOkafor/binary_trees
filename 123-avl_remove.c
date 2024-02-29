@@ -95,10 +95,10 @@ avl_t *sucessor(avl_t *tree, int mode)
  */
 void change_node(avl_t **arg_tree, avl_t **arg_node)
 {
-	avl_t *swap_node = *arg_node, *tree = *arg_tree;
+	avl_t *swap_node, *tree;
 
-	/*insert_node = *arg_node;
-	  tree = *arg_tree;*/
+	swap_node = *arg_node;
+	tree = *arg_tree;
 
 	if (tree->left && tree->left != swap_node)
 	{
